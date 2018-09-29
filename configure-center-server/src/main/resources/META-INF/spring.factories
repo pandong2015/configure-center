@@ -1,0 +1,5 @@
+# DB Configuration
+org.springframework.boot.env.EnvironmentPostProcessor=tech.pcloud.configure.center.server.config.ReadDbPropertiesPostProcessor
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=tech.pcloud.configure.center.server.config.DruidDataSourceAutoConfiguration

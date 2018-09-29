@@ -1,0 +1,33 @@
+syntax = "proto3";
+package tecp.pcloud.configure.center.protocol;
+option java_outer_classname = "CCProtocol";
+
+message Protocol {
+    ProtocolHeader header = 1;
+    ProtocolBody body = 2;
+}
+
+message ProtocolHeader {
+    bytes signature = 1;
+    repeated DataEntry headers = 2;
+}
+
+message ProtocolBody {
+    repeated PropertyEntry properties = 3;
+}
+
+enum PropertyEntryType {
+    AUTO = 0;
+    RESTRATE = 1;
+    CONNECT = 2;
+}
+
+message DataEntry {
+    bytes name = 1;
+    bytes value = 2;
+}
+
+message PropertyEntry {
+    DataEntry data = 1;
+    PropertyEntryType type = 2;
+}
