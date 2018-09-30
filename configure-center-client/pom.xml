@@ -16,5 +16,9 @@
             <groupId>tech.pcloud.framework</groupId>
             <artifactId>configure-center-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>tech.pcloud.framework</groupId>
+            <artifactId>configure-center-netty</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -33,18 +33,10 @@ public class DSASecurityCodecHandler extends MessageToMessageCodec<CCProtocol.Pr
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, CCProtocol.Protocol protocol, List<Object> list) throws Exception {
         String sign = DSAUtil.sign(protocol.getBody().toByteArray(), privateKey);
-        CCProtocol.ProtocolHeader header = null;
-        if (protocol.getHeader() == null) {
-            header = CCProtocol.ProtocolHeader.newBuilder()
-                    .setSignature(ByteString.copyFromUtf8(sign)).build();
-        } else {
-            header = CCProtocol.ProtocolHeader.newBuilder()
-                    .addAllHeaders(protocol.getHeader().getHeadersList())
-                    .setSignature(ByteString.copyFromUtf8(sign)).build();
-        }
         CCProtocol.Protocol newProtocol = CCProtocol.Protocol.newBuilder()
                 .setBody(protocol.getBody())
-                .setHeader(header)
+                .setHeader(protocol.getHeader())
+                .setSignature(ByteString.copyFromUtf8(sign))
                 .build();
         list.add(newProtocol);
     }
@@ -59,7 +51,7 @@ public class DSASecurityCodecHandler extends MessageToMessageCodec<CCProtocol.Pr
 
         if (DSAUtil.verify(protocol.getBody().toByteArray(),
                 publicKeyFactory.getPublicKey(CCProtocolUtil.getHeaderValue(headerMap, CCProtocolUtil.HEADER_SERVICE_NAME)),
-                header.getSignature().toStringUtf8())) {
+                protocol.getSignature().toStringUtf8())) {
             list.add(protocol);
         } else {
             log.warn("Signature verify fail.");

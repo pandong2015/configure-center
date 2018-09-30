@@ -5,7 +5,7 @@ package tecp.pcloud.configure.center.core.exception;
  * @Author pandong
  * @Date 2018/9/28 16:33
  **/
-public class InitKeyException extends AppException {
+public class InitKeyException extends SecurityException {
     public static final int DEFAULT_USER_ERROR_CODE = 2001;
 
     public InitKeyException() {

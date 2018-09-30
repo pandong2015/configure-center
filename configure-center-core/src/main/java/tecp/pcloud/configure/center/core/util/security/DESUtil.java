@@ -1,6 +1,5 @@
 package tecp.pcloud.configure.center.core.util.security;
 
-import tech.pcloud.configure.center.server.util.Global;
 import tecp.pcloud.configure.center.core.exception.DESException;
 
 import javax.crypto.Cipher;
@@ -85,6 +84,6 @@ public class DESUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(DESUtil.encrypt("123456", Global.SECURITY_KEY));
+        System.out.println(DESUtil.encrypt("123456",""));
     }
 }

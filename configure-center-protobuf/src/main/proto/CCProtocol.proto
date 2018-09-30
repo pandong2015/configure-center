@@ -5,11 +5,11 @@ option java_outer_classname = "CCProtocol";
 message Protocol {
     ProtocolHeader header = 1;
     ProtocolBody body = 2;
+    bytes signature = 3;
 }
 
 message ProtocolHeader {
-    bytes signature = 1;
-    repeated DataEntry headers = 2;
+    repeated DataEntry headers = 1;
 }
 
 message ProtocolBody {
