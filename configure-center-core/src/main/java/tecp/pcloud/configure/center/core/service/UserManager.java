@@ -25,6 +25,15 @@ public interface UserManager {
 
     void update(User user);
 
+    void updatePassword(User user);
+
+    default void updatePassword(long id, String password) {
+        User user = new User();
+        user.setPassword(password);
+        user.setId(id);
+        updatePassword(user);
+    }
+
     void delete(long id);
 
     UserInfo load(long id);

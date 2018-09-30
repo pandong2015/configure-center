@@ -45,7 +45,7 @@ public class UserController extends AppController {
         return success();
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public RestResult delete(final @PathVariable("userId") long userId) {
         userManager.delete(userId);
         return success();

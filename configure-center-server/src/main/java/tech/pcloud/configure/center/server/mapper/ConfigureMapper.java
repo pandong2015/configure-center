@@ -82,6 +82,9 @@ public interface ConfigureMapper {
             if (StringUtils.isNotBlank(parameters.getName())) {
                 sql.AND().WHERE("name like concat(concat('%', #{request.parameters.name}),'%')");
             }
+            if (StringUtils.isBlank(parameters.getStatus())) {
+                parameters.setStatus("ACTIVE");
+            }
             if (StringUtils.isNotBlank(parameters.getStatus())) {
                 sql.AND().WHERE("status = #{request.parameters.status}");
             }

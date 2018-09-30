@@ -1,5 +1,7 @@
 package tech.pcloud.configure.center.server.service;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.pcloud.configure.center.server.config.AppProperties;
@@ -67,7 +69,7 @@ public class UserManagerImpl implements UserManager {
         if (tmp == null) {
             throw new UnLoginOutException("no login info.");
         }
-        if (System.currentTimeMillis() - tmp.getUpdateTime().getTime() >= properties.getAccountTimeout()*60*1000) {
+        if (System.currentTimeMillis() - tmp.getUpdateTime().getTime() >= properties.getAccountTimeout() * 60 * 1000) {
             String newToken = UUID.randomUUID().toString();
             tokenMapper.save(newToken, tmp.getUserId());
             tmp = tokenMapper.loadTokenByUserId(tmp.getUserId());
@@ -116,12 +118,23 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public void insert(User user) {
+        String randomPassword = RandomStringUtils.random(12, true, true);
+        user.setPassword(Base64.getEncoder().encodeToString(DESUtil.encrypt(randomPassword, properties.getSecurityKey())));
         userMapper.insert(user);
     }
 
     @Override
     public void update(User user) {
         userMapper.update(user);
+    }
+
+    @Override
+    public void updatePassword(User user) {
+        String password = user.getPassword();
+        if(StringUtils.isBlank(password)){
+            password = RandomStringUtils.random(12, true, true);
+        }
+        user.setPassword(Base64.getEncoder().encodeToString(DESUtil.encrypt(password, properties.getSecurityKey())));
     }
 
     @Override
@@ -132,7 +145,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public UserInfo load(long id) {
         User user = userMapper.load(id);
-        if(user==null){
+        if (user == null) {
             throw new NoDataException("data is not exist.");
         }
         UserInfo userInfo = new UserInfo();

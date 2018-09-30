@@ -18,13 +18,16 @@ import java.util.List;
  * @Date 2018/9/28 15:23
  **/
 public interface UserMapper {
-    @Insert("insert into user(name, email, account) values(#{user.name}, #{user.email}, #{user.account})")
+    @Insert("insert into user(name, email, account, password) values(#{user.name}, #{user.email}, #{user.account}, #{user.password})")
     @SelectKey(before = false, keyColumn = "id", keyProperty = "user.id", resultType = Long.class,
             statementType = StatementType.STATEMENT, statement = "SELECT LAST_INSERT_ID() AS id")
     long insert(@Param("user") User user);
 
-    @Update("update user set name=#{user.name}, email=${user.email} where id=#{user.id}")
+    @Update("update user set name=#{user.name}, email=#{user.email} where id=#{user.id}")
     void update(@Param("user") User user);
+
+    @Update("update user set password=#{user.password} where id=#{user.id}")
+    void updatePassword(@Param("user") User user);
 
     @Update("update user set status=#{status} where id=#{id}")
     void updateStatus(@Param("id") long id, @Param("status") String status);
@@ -80,6 +83,9 @@ public interface UserMapper {
             }
             if (StringUtils.isNotBlank(parameters.getEmail())) {
                 sql.AND().WHERE("email like concat(concat('%', #{request.parameters.email}),'%')");
+            }
+            if (StringUtils.isBlank(parameters.getStatus())) {
+                parameters.setStatus("ACTIVE");
             }
             if (StringUtils.isNotBlank(parameters.getStatus())) {
                 sql.AND().WHERE("status = #{request.parameters.status}");
