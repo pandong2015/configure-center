@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.pcloud.configure.center.server.mapper.ServiceMapper;
 import tech.pcloud.configure.center.server.mapper.UserMapper;
-import tech.pcloud.configure.center.server.util.security.DSAUtil;
+import tecp.pcloud.configure.center.core.util.security.DSAUtil;
 import tecp.pcloud.configure.center.core.exception.InitKeyException;
 import tecp.pcloud.configure.center.core.exception.NoDataException;
 import tecp.pcloud.configure.center.core.model.po.Service;
@@ -95,6 +95,11 @@ public class ServiceManagerImpl implements ServiceManager {
         serviceInfo.setService(service);
         serviceInfo.setUser(userMapper.load(service.getUserId()));
         return serviceInfo;
+    }
+
+    @Override
+    public Service loadByName(String name) {
+        return serviceMapper.loadByName(name);
     }
 
     @Override

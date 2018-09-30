@@ -27,5 +27,7 @@ public interface ServiceManager {
 
     ServiceInfo load(final long id);
 
+    Service loadByName(final String name);
+
     List<OptionResponse> allActive();
 }

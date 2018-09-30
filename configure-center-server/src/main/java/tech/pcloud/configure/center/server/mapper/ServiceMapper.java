@@ -45,6 +45,9 @@ public interface ServiceMapper {
     @Select("select id, name, user_id, private_key, public_key, status, create_time, update_time from service where id=#{id}")
     Service load(final @Param("id") long id);
 
+    @Select("select id, name, user_id, private_key, public_key, status, create_time, update_time from service where name=#{name}")
+    Service loadByName(final @Param("name") String name);
+
     @ResultMap("ServiceResultMap")
     @SelectProvider(type = ServiceProvider.class, method = "select")
     List<Service> select(final @Param("request") SearchPeametersRequest<ServiceSearchParameters> request);

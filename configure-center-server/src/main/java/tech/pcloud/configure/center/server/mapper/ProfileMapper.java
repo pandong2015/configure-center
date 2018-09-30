@@ -53,6 +53,10 @@ public interface ProfileMapper {
     Profile load(final @Param("id") long id);
 
     @ResultMap("ProfileResultMap")
+    @Select("select a.id, a.name, a.status, a.create_time, a.update_time from profile a where a.name=#{name}")
+    Profile loadByName(final @Param("name") String name);
+
+    @ResultMap("ProfileResultMap")
     @Select("select a.id, a.name, a.status, a.create_time, a.update_time from profile a where a.status='ACTIVE'")
     List<Profile> allActive();
 

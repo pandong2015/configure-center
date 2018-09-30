@@ -73,6 +73,11 @@ public class ProfileManagerImpl implements ProfileManager {
     }
 
     @Override
+    public Profile loadByName(String name) {
+        return profileMapper.loadByName(name);
+    }
+
+    @Override
     public List<OptionResponse> allActive() {
         return profileMapper.allActive().stream()
                 .map(r -> {

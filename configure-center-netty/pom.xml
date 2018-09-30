@@ -11,5 +11,18 @@
 
     <artifactId>configure-center-netty</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.pcloud.framework</groupId>
+            <artifactId>configure-center-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>

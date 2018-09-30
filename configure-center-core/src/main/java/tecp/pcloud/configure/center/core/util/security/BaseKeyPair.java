@@ -1,4 +1,4 @@
-package tech.pcloud.configure.center.server.util.security;
+package tecp.pcloud.configure.center.core.util.security;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;

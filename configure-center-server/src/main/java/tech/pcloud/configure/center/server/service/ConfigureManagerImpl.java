@@ -84,6 +84,11 @@ public class ConfigureManagerImpl implements ConfigureManager {
     }
 
     @Override
+    public List<Configure> selectServiceAndProfile(long serviceId, long profileId) {
+        return configureMapper.selectServiceAndProfile(serviceId, profileId);
+    }
+
+    @Override
     public ConfigureInfo load(long id) {
         Configure configure = configureMapper.load(id);
         if (configure == null) {

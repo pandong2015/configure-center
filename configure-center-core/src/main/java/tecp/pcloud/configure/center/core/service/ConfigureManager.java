@@ -6,6 +6,8 @@ import tecp.pcloud.configure.center.core.model.vo.request.SearchPeametersRequest
 import tecp.pcloud.configure.center.core.model.vo.request.parameter.ConfigureSearchParameters;
 import tecp.pcloud.configure.center.core.model.vo.response.ConfiguresResponse;
 
+import java.util.List;
+
 /**
  * @ClassName ConfigureService
  * @Author pandong
@@ -19,6 +21,8 @@ public interface ConfigureManager {
     void delete(final Configure configure);
 
     ConfiguresResponse select(final SearchPeametersRequest<ConfigureSearchParameters> request);
+
+    List<Configure> selectServiceAndProfile(final long serviceId, final long profileId);
 
     ConfigureInfo load(final long id);
 

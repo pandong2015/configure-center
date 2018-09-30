@@ -44,6 +44,10 @@ public interface ConfigureMapper {
     })
     List<Configure> select(@Param("request") final SearchPeametersRequest<ConfigureSearchParameters> request);
 
+    @ResultMap("ConfigureResultMap")
+    @Select("select name, status, create_time, update_time, value, profile_id, service_id, type from role a where a.service_id=#{serviceId} and a.profile_id=#{profileId}")
+    List<Configure> selectServiceAndProfile(@Param("serviceId") final long servicsId, @Param("profileId") long profileId);
+
     @SelectProvider(type = ConfigureProvider.class, method = "selectCount")
     int selectCount(@Param("request") final SearchPeametersRequest<ConfigureSearchParameters> request);
 

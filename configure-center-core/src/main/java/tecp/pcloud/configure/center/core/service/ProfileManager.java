@@ -25,5 +25,7 @@ public interface ProfileManager {
 
     ProfileInfo load(long id);
 
+    Profile loadByName(String name);
+
     List<OptionResponse> allActive();
 }
