@@ -27,6 +27,8 @@ public interface UserManager {
 
     void updatePassword(User user);
 
+    void updatePassword(long userId);
+
     default void updatePassword(long id, String password) {
         User user = new User();
         user.setPassword(password);

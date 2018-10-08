@@ -138,6 +138,15 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
+    public void updatePassword(long userId) {
+        User user = userMapper.load(userId);
+        if (user == null) {
+            throw new NoDataException("data is not exist.");
+        }
+        updatePassword(user);
+    }
+
+    @Override
     public void delete(long id) {
         userMapper.delete(id);
     }

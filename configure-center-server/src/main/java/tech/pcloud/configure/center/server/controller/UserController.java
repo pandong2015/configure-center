@@ -45,6 +45,12 @@ public class UserController extends AppController {
         return success();
     }
 
+    @RequestMapping(value = "/renew/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public RestResult reNewPassword(final @PathVariable("userId") long userId){
+        userManager.updatePassword(userId);
+        return success();
+    }
+
     @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public RestResult delete(final @PathVariable("userId") long userId) {
         userManager.delete(userId);
